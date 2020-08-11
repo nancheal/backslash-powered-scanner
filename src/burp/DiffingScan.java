@@ -404,6 +404,17 @@ class DiffingScan {
                     normalisedDotSlash.setPrefix(Probe.PREPEND);
                     results.addAll(injector.fuzz(softBase, normalisedDotSlash));
                 }
+                Probe doubleDotSlash = new Probe("File Path Manipulation(doubleDotSlash)", 3, "....//");
+                doubleDotSlash.setEscapeStrings("...//");
+                doubleDotSlash.setRandomAnchor(false);
+                doubleDotSlash.setPrefix(Probe.PREPEND);
+                results.addAll(injector.fuzz(softBase, doubleDotSlash));
+
+                Probe urlEncodeDotSlash = new Probe("File Path Manipulation(urlEncodeDotSlash)", 3, "..%2f");
+                urlEncodeDotSlash.setEscapeStrings(".%2f");
+                urlEncodeDotSlash.setRandomAnchor(false);
+                urlEncodeDotSlash.setPrefix(Probe.PREPEND);
+                results.addAll(injector.fuzz(softBase, urlEncodeDotSlash));
             }
 
             if (Utilities.globalSettings.getBoolean("diff: experimental folder attacks")) {
