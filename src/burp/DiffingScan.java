@@ -417,6 +417,22 @@ class DiffingScan {
                 results.addAll(injector.fuzz(softBase, urlEncodeDotSlash));
             }
 
+            if (Utilities.globalSettings.getBoolean("thorough mode") && !isInPath && baseValue.contains("/") && !baseValue.equals("")) {
+                String prefix = baseValue.substring(0, baseValue.lastIndexOf("/"));
+                String suffix = baseValue.substring(baseValue.lastIndexOf("/") + 1);
+                Probe pathDotSlash = new Probe("File Path Manipulation(pathDotSlash)", 3, prefix + "/../" + suffix, prefix + "/z/" + suffix, prefix + "/_/" + suffix,
+                        prefix + "/./../" + suffix);
+                pathDotSlash.setEscapeStrings(prefix + "/./" + suffix, prefix + "/././" + suffix, prefix + "/./././" + suffix);
+                pathDotSlash.setRandomAnchor(false);
+                pathDotSlash.setPrefix(Probe.REPLACE);
+                results.addAll(injector.fuzz(softBase, pathDotSlash));
+                Probe pathDoubleDotSlash = new Probe("File Path Manipulation(pathDoubleDotSlash)", 3, prefix + "/....//" + suffix);
+                pathDoubleDotSlash.setEscapeStrings(prefix + "...//" + suffix);
+                pathDoubleDotSlash.setRandomAnchor(false);
+                pathDoubleDotSlash.setPrefix(Probe.REPLACE);
+                results.addAll(injector.fuzz(softBase, pathDoubleDotSlash));
+            }
+
             if (Utilities.globalSettings.getBoolean("diff: experimental folder attacks")) {
                 // fixme breaks on short input
                 String firstBlat = "z" + baseValue.substring(1, baseValue.length());

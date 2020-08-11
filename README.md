@@ -8,8 +8,10 @@ The code can be found at https://github.com/portswigger/backslash-powered-scanne
 # Changelog
 **self 20200811**
  - burp\DiffingScan.java:487 File add 
-    - Path Manipulation(doubleDotSlash) - https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively
-    - File Path Manipulation(urlEncodeDotSlash) - https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode
+    - 1.Path Manipulation(doubleDotSlash) - https://portswigger.net/web-security/file-path-traversal/lab-sequences-stripped-non-recursively
+    - 2.File Path Manipulation(urlEncodeDotSlash) - https://portswigger.net/web-security/file-path-traversal/lab-superfluous-url-decode
+    - 3.File Path Manipulation(pathDotSlash) - https://portswigger.net/web-security/file-path-traversal/lab-validate-start-of-path
+    - 4.File Path Manipulation(pathDoubleDotSlash) - 1+3
  
 **1.03 20190814**
  - Detect path normalization exploits based on Orange Tsai's research
